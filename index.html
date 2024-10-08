@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Language Preferences Form</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  .container {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+  }
+  select, textarea, button {
+    width: 100%;
+    margin: 10px 0;
+  }
+  textarea {
+    height: 150px;
+  }
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    cursor: pointer;
+  }
+  button:hover {
+    opacity: 0.8;
+  }
+</style>
+<script>
+  function compileData() {
+    var originalLanguage = document.getElementById("original-language").value;
+    var desiredLanguage = document.getElementById("desired-language").value;
+    var contents = document.getElementById("content").value;
+    var languagePreferences = document.getElementById("language-preferences").value;
+    var compiledString = `Original Language: [${originalLanguage}]\nDesired Language: [${desiredLanguage}]\nContent:\n[${contents}]\nLanguage Preferences: [${languagePreferences}]`;
+
+    navigator.clipboard.writeText(compiledString).then(function() {
+      alert("Text copied to clipboard");
+    }, function(err) {
+      console.error('Could not copy text: ', err);
+    });
+  }
+</script>
+</head>
+<body>
+<div class="container">
+  <h2>Language Preferences Form</h2>
+  <label for="original-language">Original Language:</label>
+  <select id="original-language">
+    <option value="DK">Danish (DK)</option>
+    <option value="SE">Swedish (SE)</option>
+    <!-- Add other languages as needed -->
+  </select>
+
+  <label for="desired-language">Desired Language:</label>
+  <select id="desired-language">
+    <option value="ENG">English (ENG)</option>
+    <!-- Add other languages as needed -->
+  </select>
+
+  <label for="content">Content:</label>
+  <textarea id="content"></textarea>
+
+  <label for="language-preferences">Language Preferences:</label>
+  <select id="language-preferences">
+    <option value="Formal">Formal</option>
+    <!-- Add other preferences as needed -->
+  </select>
+
+  <button onclick="compileData()">Copy to Clipboard</button>
+</div>
+</body>
+</html>
