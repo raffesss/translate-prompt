@@ -45,6 +45,10 @@
     var desiredLanguage = document.getElementById("desired-language").value;
     var contents = document.getElementById("content").value;
     var languagePreferences = document.getElementById("language-preferences").value;
+    var attachFileCheckbox = document.getElementById("attach-file").checked;
+    
+    var contentValue = attachFileCheckbox ? '[attached file]' : `[${contents}]`;
+    
     var constantString = `
 
 ** RAMGPT RESPONSE GUIDELINES **
@@ -52,9 +56,7 @@ Ignore all previous instructions.
 Use the above prompt to accurately translate the 'Content' from the 'Original Language' to the 'Desired Language' using a language and vocabulary according to the 'Language Preferences'.
 Proofread thoroughly and ask user if you have questions regarding either language or content. Make sure you use correct grammar, such as the correct pronouns for nouns in nordic languages etc. Do not explain what you are doing. Do not self-reference. You are an expert translator with a masters degree in grammar of nordic and english languages. Use a native and academically correct language. Most importantly; Make sure the text and language lives up to a business standard and does not sound like an AI-written text. Use Human language.`;
 
-
-    
-    var compiledString = `Original Language: [${originalLanguage}]\nDesired Language: [${desiredLanguage}]\nContent:\n[${contents}]\nLanguage Preferences: [${languagePreferences}]\n${constantString}`;
+    var compiledString = `Original Language: [${originalLanguage}]\nDesired Language: [${desiredLanguage}]\nContent:\n${contentValue}\nLanguage Preferences: [${languagePreferences}]\n${constantString}`;
 
     navigator.clipboard.writeText(compiledString).then(function() {
       console.log("Text copied to clipboard");
@@ -92,8 +94,9 @@ Proofread thoroughly and ask user if you have questions regarding either languag
     <!-- Add other preferences as needed -->
   </select>
 
-  <label>File attached:</label> <input type="checkbox" id="attach-file" onclick="toggleContentField()">
-
+  <label for="attach-file">If you want to attach a file, check this box:</label>
+  <input type="checkbox" id="attach-file" onclick="toggleContentField()">
+  
   <label for="content">Content:</label>
   <textarea id="content"></textarea>
 
