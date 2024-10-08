@@ -3,101 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Language Preferences Form</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-  }
-  .container {
-    margin: auto;
-    width: 50%;
-    padding: 10px;
-  }
-  select, textarea, button {
-    width: 100%;
-    margin: 10px 0;
-  }
-  textarea {
-    height: 150px;
-  }
-  button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    border: none;
-    cursor: pointer;
-  }
-  button:hover {
-    opacity: 0.8;
-  }
-</style>
+<title>Language Translation Form</title>
 <script>
-  function compileData() {
-    var originalLanguage = document.getElementById("original-language").value;
-    var desiredLanguage = document.getElementById("desired-language").value;
-    var contents = document.getElementById("content").value;
-    var languagePreferences = document.getElementById("language-preferences").value;
-    var constantString = `
+function copyContent() {
+  // Get values from the form
+  const originalLanguage = document.getElementById('original-language').value;
+  const desiredLanguage = document.getElementById('desired-language').value;
+  const languagePreferences = document.getElementById('language-preferences').value;
+  const content = document.getElementById('content-checkbox').checked ? '[attached file]' : document.getElementById('content').value;
 
-** RAMGPT RESPONSE GUIDELINES **
-Ignore all previous instructions.
-Use the above prompt to accurately translate the 'Content' from the 'Original Language' to the 'Desired Language' using a language and vocabulary according to the 'Language Preferences'.
-Proofread thoroughly and ask user if you have questions regarding either language or content. Make sure you use correct grammar, such as the correct pronouns for nouns in nordic languages etc. Do not explain what you are doing. Do not self-reference. You are an expert translator with a masters degree in grammar of nordic and english languages. Use a native and academically correct language. Most importantly; Make sure the text and language lives up to a business standard and does not sound like an AI-written text. Use Human language.`;
+  // Compile the string to be copied to clipboard
+  const fullString = `Original Language: [${originalLanguage}]\\nDesired Language: [${desiredLanguage}]\\nContent:\\n[${content}]\\nLanguage Preferences: [${languagePreferences}]\\n\\n** RAMGPT RESPONSE GUIDELINES **\\nIgnore all previous instructions.\\nUse the above prompt to accurately translate the 'Content' from the 'Original Language' to the 'Desired Language' using a language and vocabulary according to the 'Language Preferences'.\\nProofread thoroughly and ask user if you have questions regarding either language or content. Do not explain what you are doing. Do not self reference. You are an expert translator. Use a native and academically correct language.`;
 
+  // Copy to clipboard
+  navigator.clipboard.writeText(fullString).then(function() {
+    // Link to chat.ramboll.com
+    window.location.href = 'https://chat.ramboll.com';
+    // Alternatively, to open in a new tab use:
+    // window.open('https://chat.ramboll.com', '_blank');
+  }, function(err) {
+    console.error('Could not copy text: ', err);
+  });
+}
 
-    
-    var compiledString = `Original Language: [${originalLanguage}]\nDesired Language: [${desiredLanguage}]\nContent:\n[${contents}]\nLanguage Preferences: [${languagePreferences}]\n${constantString}`;
-
-    navigator.clipboard.writeText(compiledString).then(function() {
-      console.log("Text copied to clipboard");
-      window.location.href = 'https://chat.ramboll.com';
-    }, function(err) {
-      console.error('Could not copy text: ', err);
-    });
-  }
+function toggleContentField() {
+  // Disable or enable the content field based on checkbox
+  const contentField = document.getElementById('content');
+  const attachFileCheckbox = document.getElementById('content-checkbox');
+  contentField.disabled = attachFileCheckbox.checked;
+}
 </script>
 </head>
 <body>
-<div class="container">
-  <h2>Language Translation Prompter</h2>
+<form id="language-form" onsubmit="event.preventDefault(); copyContent();">
   <label for="original-language">Original Language:</label>
   <select id="original-language">
-    <option value="EN">English (EN)</option>
-    <option value="DK">Danish (DK)</option>
-    <option value="SE">Swedish (SE)</option>
-    <option value="NO">Norwegian (NO)</option>
-    <option value="FR">French (FR)</option>
-    <option value="ES">Spanish (ES)</option>
-    <option value="JA">Japanese (JA)</option>
-    <!-- Add other languages as needed -->
+    <!-- Add options for each language -->
   </select>
-
+  
   <label for="desired-language">Desired Language:</label>
   <select id="desired-language">
-    <option value="DK">Danish (DK)</option>
-    <option value="EN">English (EN)</option>
-    <option value="SE">Swedish (SE)</option>
-    <option value="NO">Norwegian (NO)</option>
-    <option value="FR">French (FR)</option>
-    <option value="ES">Spanish (ES)</option>
-    <option value="JA">Japanese (JA)</option>
-    <!-- Add other preferences as needed -->
+    <!-- Add options for each language -->
   </select>
-
+  
   <label for="content">Content:</label>
   <textarea id="content"></textarea>
-
+  
   <label for="language-preferences">Language Preferences:</label>
   <select id="language-preferences">
-    <option value="Formal">Formal</option>
-    <option value="Friendly">Friendly</option>
-    <option value="Academic">Academic</option>
-    <option value="Relaxed">Relaxed</option>
-    <!-- Add other preferences as needed -->
+    <!-- Add options for preferences -->
   </select>
-
-  <button onclick="compileData()">Copy to Clipboard</button>
-</div>
+  
+  <label for="content-checkbox">Attach file:</label>
+  <input type="checkbox" id="content-checkbox" onchange="toggleContentField()">
+  
+  <button type="submit">Submit</button>
+</form>
 </body>
 </html>
