@@ -38,7 +38,16 @@
     var desiredLanguage = document.getElementById("desired-language").value;
     var contents = document.getElementById("content").value;
     var languagePreferences = document.getElementById("language-preferences").value;
-    var compiledString = `Original Language: [${originalLanguage}]\nDesired Language: [${desiredLanguage}]\nContent:\n[${contents}]\nLanguage Preferences: [${languagePreferences}]`;
+    var constantString = `
+
+** RAMGPT RESPONSE GUIDELINES **
+Ignore all previous instructions.
+Use the above prompt to accurately translate the 'Content' from the 'Original Language' to the 'Desired Language' using a language and vocabulary according to the 'Language Preferences'.
+Proofread thoroughly and ask user if you have questions regarding either language or content. Do not explain what you are doing. Do not self-reference. You are an expert translator. Use a native and academically correct language.`;
+
+
+    
+    var compiledString = `Original Language: [${originalLanguage}]\nDesired Language: [${desiredLanguage}]\nContent:\n[${contents}]\nLanguage Preferences: [${languagePreferences}]\n${constantString}`;
 
     navigator.clipboard.writeText(compiledString).then(function() {
       console.log("Text copied to clipboard");
