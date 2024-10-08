@@ -41,7 +41,8 @@
     var compiledString = `Original Language: [${originalLanguage}]\nDesired Language: [${desiredLanguage}]\nContent:\n[${contents}]\nLanguage Preferences: [${languagePreferences}]`;
 
     navigator.clipboard.writeText(compiledString).then(function() {
-      alert("Text copied to clipboard");
+      console.log("Text copied to clipboard");
+      window.location.href = 'https://chat.ramboll.com';
     }, function(err) {
       console.error('Could not copy text: ', err);
     });
@@ -50,18 +51,27 @@
 </head>
 <body>
 <div class="container">
-  <h2>Language Preferences Form</h2>
+  <h2>Language Translation Prompter</h2>
   <label for="original-language">Original Language:</label>
   <select id="original-language">
     <option value="DK">Danish (DK)</option>
     <option value="SE">Swedish (SE)</option>
+    <option value="EN">English (EN)</option>
+    <option value="NO">Norwegian (NO)</option>
+    <option value="FR">French (FR)</option>
+    <option value="ES">Spanish (ES)</option>
     <!-- Add other languages as needed -->
   </select>
 
   <label for="desired-language">Desired Language:</label>
   <select id="desired-language">
-    <option value="ENG">English (ENG)</option>
-    <!-- Add other languages as needed -->
+    <option value="DK">Danish (DK)</option>
+    <option value="SE">Swedish (SE)</option>
+    <option value="EN">English (EN)</option>
+    <option value="NO">Norwegian (NO)</option>
+    <option value="FR">French (FR)</option>
+    <option value="ES">Spanish (ES)</option>
+    <!-- Add other preferences as needed -->
   </select>
 
   <label for="content">Content:</label>
@@ -70,6 +80,9 @@
   <label for="language-preferences">Language Preferences:</label>
   <select id="language-preferences">
     <option value="Formal">Formal</option>
+    <option value="Friendly">Friendly</option>
+    <option value="Academic">Academic</option>
+    <option value="Relaxed">Relaxed</option>
     <!-- Add other preferences as needed -->
   </select>
 
