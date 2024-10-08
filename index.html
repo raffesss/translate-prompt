@@ -33,6 +33,13 @@
   }
 </style>
 <script>
+  
+  function toggleContentField() {
+    var contentField = document.getElementById("content");
+    const attachFileCheckbox = document.getElementById("attach-file");
+    contentField.disabled = attachFileCheckbox.checked;
+  }
+
   function compileData() {
     var originalLanguage = document.getElementById("original-language").value;
     var desiredLanguage = document.getElementById("desired-language").value;
@@ -84,6 +91,8 @@ Proofread thoroughly and ask user if you have questions regarding either languag
     <option value="JA">Japanese (JA)</option>
     <!-- Add other preferences as needed -->
   </select>
+
+  <input type="checkbox" id="attach-file" onclick="toggleContentField()>
 
   <label for="content">Content:</label>
   <textarea id="content"></textarea>
