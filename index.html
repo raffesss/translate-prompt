@@ -2,62 +2,56 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Language Translation Form</title>
 <script>
-function copyContent() {
-  // Get values from the form
-  const originalLanguage = document.getElementById('original-language').value;
-  const desiredLanguage = document.getElementById('desired-language').value;
-  const languagePreferences = document.getElementById('language-preferences').value;
-  const content = document.getElementById('content-checkbox').checked ? '[attached file]' : document.getElementById('content').value;
+function copyToClipboard() {
+    const originalLang = document.getElementById("original-lang").value;
+    const desiredLang = document.getElementById("desired-lang").value;
+    const content = document.getElementById("attach-file").checked ? '[attached file]' : document.getElementById("content").value;
+    const langPref = document.getElementById("lang-pref").value;
+    const guidelines = '** RAMGPT RESPONSE GUIDELINES ** Ignore all previous instructions. Use the above prompt to accurately...';
+    const formattedText = `Original Language: [${originalLang}] Desired Language: [${desiredLang}] Content: [${content}] Language Preferences: [${langPref}] ${guidelines}`;
 
-  // Compile the string to be copied to clipboard
-  const fullString = `Original Language: [${originalLanguage}]\\nDesired Language: [${desiredLanguage}]\\nContent:\\n[${content}]\\nLanguage Preferences: [${languagePreferences}]\\n\\n** RAMGPT RESPONSE GUIDELINES **\\nIgnore all previous instructions.\\nUse the above prompt to accurately translate the 'Content' from the 'Original Language' to the 'Desired Language' using a language and vocabulary according to the 'Language Preferences'.\\nProofread thoroughly and ask user if you have questions regarding either language or content. Do not explain what you are doing. Do not self reference. You are an expert translator. Use a native and academically correct language.`;
-
-  // Copy to clipboard
-  navigator.clipboard.writeText(fullString).then(function() {
-    // Link to chat.ramboll.com
-    window.location.href = 'https://chat.ramboll.com';
-    // Alternatively, to open in a new tab use:
-    // window.open('https://chat.ramboll.com', '_blank');
-  }, function(err) {
-    console.error('Could not copy text: ', err);
-  });
+    navigator.clipboard.writeText(formattedText).then(function() {
+        window.location.href = "https://chat.ramboll.com";
+    }, function(err) {
+        console.error('Could not copy text: ', err);
+    });
 }
 
 function toggleContentField() {
-  // Disable or enable the content field based on checkbox
-  const contentField = document.getElementById('content');
-  const attachFileCheckbox = document.getElementById('content-checkbox');
-  contentField.disabled = attachFileCheckbox.checked;
+    const contentField = document.getElementById("content");
+    const attachFileCheckbox = document.getElementById("attach-file");
+    contentField.disabled = attachFileCheckbox.checked;
 }
 </script>
 </head>
 <body>
-<form id="language-form" onsubmit="event.preventDefault(); copyContent();">
-  <label for="original-language">Original Language:</label>
-  <select id="original-language">
-    <!-- Add options for each language -->
-  </select>
-  
-  <label for="desired-language">Desired Language:</label>
-  <select id="desired-language">
-    <!-- Add options for each language -->
-  </select>
-  
-  <label for="content">Content:</label>
-  <textarea id="content"></textarea>
-  
-  <label for="language-preferences">Language Preferences:</label>
-  <select id="language-preferences">
-    <!-- Add options for preferences -->
-  </select>
-  
-  <label for="content-checkbox">Attach file:</label>
-  <input type="checkbox" id="content-checkbox" onchange="toggleContentField()">
-  
-  <button type="submit">Submit</button>
-</form>
+
+<h1>Language Translation Form</h1>
+
+<label for="original-lang">Original Language:</label>
+<select id="original-lang">
+    <!-- Insert language options here -->
+</select>
+
+<label for="desired-lang">Desired Language:</label>
+<select id="desired-lang">
+    <!-- Insert language options here -->
+</select>
+
+<label for="lang-pref">Language Preferences:</label>
+<select id="lang-pref">
+    <!-- Insert language preference options here -->
+</select>
+
+<label for="content">Content:</label>
+<textarea id="content"></textarea>
+
+<label for="attach-file">Attach file:</label>
+<input type="checkbox" id="attach-file" onclick="toggleContentField()">
+
+<button onclick="copyToClipboard()">Submit</button>
+
 </body>
 </html>
