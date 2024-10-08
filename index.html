@@ -65,6 +65,23 @@ Proofread thoroughly and ask user if you have questions regarding either languag
       console.error('Could not copy text: ', err);
     });
   }
+
+document.getElementById("attach-file").addEventListener("change", function() {
+  var reminderText = document.getElementById("file-reminder");
+  if (this.checked) {
+    if (!reminderText) {
+      reminderText = document.createElement("div");
+      reminderText.id = "file-reminder";
+      reminderText.textContent = "Remember to attach your file on the next page in order to allow translation";
+      this.parentNode.insertBefore(reminderText, this.nextSibling);
+    } else {
+      reminderText.style.display = "block";
+    }
+  } else if (reminderText) {
+    reminderText.style.display = "none";
+  }
+});
+  
 </script>
 </head>
 <body>
