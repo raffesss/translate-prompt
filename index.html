@@ -22,7 +22,7 @@
     height: 150px;
   }
   button {
-    background-color: #4CAF50;
+    background-color: #009df0;
     color: white;
     padding: 14px 20px;
     border: none;
@@ -70,6 +70,8 @@ Proofread thoroughly and ask user if you have questions regarding either languag
 </head>
 <body>
 <div class="container">
+
+  <img src="ramboll_logo.jpg" alt="RambollLogo" width="500" height="333">
   <h2>Language Translation Prompter</h2>
   <label for="original-language">Original Language:</label>
   <select id="original-language">
@@ -111,7 +113,7 @@ Proofread thoroughly and ask user if you have questions regarding either languag
   <label for="attach-file">If you want to attach a file, check this box:</label>
   <input type="checkbox" id="attach-file" onclick="toggleContentField()">
 
-  <button onclick="compileData()">Copy to Clipboard</button>
+  <button onclick="compileData()"><b>Copy to Clipboard</b></button>
 </div>
   <script>
   document.getElementById("attach-file").addEventListener("change", function() {
