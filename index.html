@@ -53,7 +53,7 @@
 
 ** RAMGPT RESPONSE GUIDELINES **
 Ignore all previous instructions.
-Use the above prompt to accurately translate the 'Content' from the 'Original Language' to the 'Desired Language' using a language and vocabulary according to the 'Language Preferences'. If Content is set to [attached file], use the contents of the attached file as Content.
+Use the above prompt to accurately translate the 'Content' from the 'Original Language' to the 'Desired Language' using a language and vocabulary according to the 'Language Preferences'. If Content is set to [attached file], use the contents of the attached file as Content. If 'Original Language' is set to 'Detect', please detect original language from 'content' or attached file. 
 Proofread thoroughly and ask user if you have questions regarding either language or content. Make sure you use correct grammar, such as the correct pronouns for nouns in nordic languages etc. Do not explain what you are doing. Do not self-reference. You are an expert translator with a masters degree in grammar of nordic and english languages. Use a native and academically correct language. Most importantly; Make sure the text and language lives up to a business standard and does not sound like an AI-written text. Use Human language.`;
 
     var compiledString = `Original Language: [${originalLanguage}]\nDesired Language: [${desiredLanguage}]\nContent:\n${contentValue}\nLanguage Preferences: [${languagePreferences}]\n${constantString}`;
@@ -80,6 +80,7 @@ Proofread thoroughly and ask user if you have questions regarding either languag
     <option value="FR">French (FR)</option>
     <option value="ES">Spanish (ES)</option>
     <option value="JA">Japanese (JA)</option>
+    <option value="DETECT">Detect...</option>
     <!-- Add other languages as needed -->
   </select>
 
