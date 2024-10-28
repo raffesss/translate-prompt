@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Language Preferences Form</title>
 <style>
+  @font-face {
+  font-family: 'Gotham Rounded';
+  src: url(sources/GothamRounded-Light.woff) format('woff'), url(sources/GothamRounded-Light.woff2) format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  }
   body {
-    font-family: Arial, sans-serif;
+    font-family: 'Gotham Rounded', Arial, sans-serif;
     padding: 20px;
   }
   .container {
@@ -52,11 +59,11 @@
     var constantString = `
 
 ** RAMGPT RESPONSE GUIDELINES **
-Ignore all previous instructions.
-Use the above prompt to accurately translate the 'Content' from the 'Original Language' to the 'Desired Language' using a language and vocabulary according to the 'Language Preferences'. If Content is set to [attached file], please use the entire content from the attached file as content for the translation (IE. Translate the entire document). If 'Original Language' is set to 'Detect', please detect original language from 'content' or attached file. When responding, do NOT reply with the translation displayed within square brackets, but rather as a translation of the contents within the brackets. This is a wrong example: [translated message], this is a correct example: translated message. 
+Ignore all previous instructions. Also, ignore all previously attached files prior to this message. Unless the file is attached with this message, ignore it. 
+Use the above prompt to accurately translate the 'Content' from the 'Original Language' to the 'Desired Language' using a language and vocabulary according to the 'Language Preferences'. If Content is set to [attached file], please use the entire content from the attached file as content for the translation (IE. Translate the entire document). If 'Original Language' is set to 'Detect', please detect original language from 'content' or attached file. 
 Proofread thoroughly and ask user if you have questions regarding either language or content. Make sure you use correct grammar, such as the correct pronouns for nouns in nordic languages etc. Do not explain what you are doing. Do not self-reference. You are an expert translator with a masters degree in grammar of nordic and english languages. Use a native and academically correct language. Most importantly; Make sure the text and language lives up to a business standard and does not sound like an AI-written text. Use Human language.`;
 
-    var compiledString = `${constantString}\n\nOriginal Language: [${originalLanguage}]\nDesired Language: [${desiredLanguage}]\nContent:\n${contentValue}\nLanguage Preferences: [${languagePreferences}]`;
+    var compiledString = `Original Language: [${originalLanguage}]\nDesired Language: [${desiredLanguage}]\nContent:\n${contentValue}\nLanguage Preferences: [${languagePreferences}]\n${constantString}`;
 
     navigator.clipboard.writeText(compiledString).then(function() {
       console.log("Text copied to clipboard");
@@ -71,7 +78,7 @@ Proofread thoroughly and ask user if you have questions regarding either languag
 <body>
 <div class="container">
 
-  <img src="sources/ramboll_logo.svg" alt="RambollLogo" width="500" height="333">
+  <img src="sources/ramboll_logo.svg" alt="RambollLogo" width="334" height="222">
   <h2>Language Translation Prompter</h2>
   <label for="original-language">Original Language:</label>
   <select id="original-language">
