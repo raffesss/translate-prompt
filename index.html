@@ -125,7 +125,7 @@ Proofread thoroughly and ask user if you have questions regarding either languag
       if (!reminderText) {
         reminderText = document.createElement("div");
         reminderText.id = "file-reminder";
-        reminderText.textContent = "Remember to attach your file on the next page in order to allow translation";
+        reminderText.innerHTML = "<em>Remember to attach your file on the next page in order to allow translation</em>";
         this.parentNode.insertBefore(reminderText, this.nextSibling);
       } else {
         reminderText.style.display = "block";
